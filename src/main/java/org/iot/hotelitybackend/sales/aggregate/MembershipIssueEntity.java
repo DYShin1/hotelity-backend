@@ -76,7 +76,7 @@ public class MembershipIssueEntity {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "customer_code_fk", referencedColumnName = "customer_code_pk", insertable = false, updatable = false)
+	@JoinColumn(name = "customer_code_fk", insertable = false, updatable = false)
 	private CustomerEntity customer;
 
 	@ManyToOne
