@@ -1,6 +1,8 @@
 package org.iot.hotelitybackend.customer.service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.iot.hotelitybackend.customer.aggregate.NationEntity;
 import org.iot.hotelitybackend.customer.dto.NationDTO;
@@ -21,9 +23,12 @@ public class NationServiceImpl implements NationService{
 
 	@Override
 	public List<NationDTO> selectNationList() {
-		List<NationEntity> nationEntity = nationRepository.findAll();
-		List<NationDTO> nationDTOS = mapper.map(nationEntity, List.class);
-
-		return nationDTOS;
+		List<NationEntity> nationEntities = nationRepository.findAll();
+		if (nationEntities == null) {
+			return Collections.emptyList();
+		}
+		return nationEntities.stream()
+			.map(entity -> mapper.map(entity, NationDTO.class))
+			.collect(Collectors.toList());
 	}
 }
