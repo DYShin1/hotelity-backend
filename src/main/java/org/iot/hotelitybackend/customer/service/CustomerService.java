@@ -17,10 +17,7 @@ public interface CustomerService {
 
 	Map<String, Object> readExcel(Workbook workbook);
 
-	ByteArrayInputStream downloadExcel(Integer customerCodePk, String customerName, String customerEmail,
-		String customerPhoneNumber, String customerEnglishName, String customerAddress, Integer customerInfoAgreement,
-		Integer customerStatus, Date customerRegisteredDate, Integer nationCodeFk, String customerGender,
-		String nationName, String customerType, String membershipLevelName) throws IOException;
+	ByteArrayInputStream downloadExcel(CustomerCriteria criteria) throws IOException;
 
 	Map<String, Object> deleteCustomerByCustomerCodePk(int customerCodePk);
 

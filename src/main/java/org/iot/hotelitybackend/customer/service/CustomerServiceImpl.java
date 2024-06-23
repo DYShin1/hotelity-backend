@@ -284,27 +284,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
 	@Override
-	public ByteArrayInputStream downloadExcel(
-		Integer customerCodePk,
-		String customerName,
-		String customerEmail,
-		String customerPhoneNumber,
-		String customerEnglishName,
-		String customerAddress,
-		Integer customerInfoAgreement,
-		Integer customerStatus,
-		Date customerRegisteredDate,
-		Integer nationCodeFk,
-		String customerGender,
-		String nationName,
-		String customerType,
-		String membershipLevelName
-	) throws IOException {
+	public ByteArrayInputStream downloadExcel(CustomerCriteria criteria) throws IOException {
 
-		Specification<CustomerEntity> spec = spec(customerCodePk, customerName, customerEmail, customerPhoneNumber,
-			customerEnglishName,
-			customerAddress, customerInfoAgreement, customerStatus, customerRegisteredDate, nationCodeFk,
-			customerGender, nationName, customerType, membershipLevelName);
+		Specification<CustomerEntity> spec = spec(criteria);
 
 		// 필터 조건에 따라 고객 정보 조회
 		List<CustomerEntity> customerPage = customerRepository.findAll(spec);

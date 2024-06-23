@@ -141,27 +141,10 @@ public class CustomerController {
 
     @GetMapping("/excel/download")
     public ResponseEntity<InputStreamResource> downloadExcel(
-        @RequestParam(required = false) Integer customerCodePk,
-        @RequestParam(required = false) String customerName,
-        @RequestParam(required = false) String customerEmail,
-        @RequestParam(required = false) String customerPhoneNumber,
-        @RequestParam(required = false) String customerEnglishName,
-        @RequestParam(required = false) String customerAddress,
-        @RequestParam(required = false) Integer customerInfoAgreement,
-        @RequestParam(required = false) Integer customerStatus,
-        @RequestParam(required = false) Date customerRegisteredDate,
-        @RequestParam(required = false) Integer nationCodeFk,
-        @RequestParam(required = false) String customerGender,
-        @RequestParam(required = false) String nationName,
-        @RequestParam(required = false) String customerType,
-        @RequestParam(required = false) String membershipLevelName
+        @ModelAttribute CustomerCriteria criteria
     ){
         try{
-            ByteArrayInputStream result = customerService.downloadExcel(
-                customerCodePk, customerName, customerEmail, customerPhoneNumber, customerEnglishName,
-                customerAddress, customerInfoAgreement, customerStatus, customerRegisteredDate, nationCodeFk,
-                customerGender, nationName, customerType, membershipLevelName
-            );
+            ByteArrayInputStream result = customerService.downloadExcel(criteria);
 
             // 파일명에 현재시간 넣기 위한 작업
             Calendar calendar = Calendar.getInstance();

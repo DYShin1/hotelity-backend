@@ -257,11 +257,22 @@ class CustomerServiceImplTests {
 		when(customerRepository.findAll(any(Specification.class))).thenReturn(customerEntities);
 		when(mapper.map(any(CustomerEntity.class), eq(CustomerDTO.class))).thenReturn(new CustomerDTO());
 
-		ByteArrayInputStream result = customerService.downloadExcel(
-			1, "John Doe", "john.doe@example.com", "1234567890", "John",
-			"123 Street", 1, 1, new Date(), 1, "Male",
-			"USA", "VIP", "Gold"
-		);
+		CustomerCriteria criteria = new CustomerCriteria();
+		criteria.setPageNum(1);
+		criteria.setCustomerName("John Doe");
+		criteria.setCustomerEmail("john.doe@example.com");
+		criteria.setCustomerPhoneNumber("1234567890");
+		criteria.setCustomerEnglishName("John");
+		criteria.setCustomerAddress("123 Street");
+		criteria.setCustomerInfoAgreement(1);
+		criteria.setCustomerStatus(1);
+		criteria.setCustomerRegisteredDate(new Date());
+		criteria.setCustomerType("1");
+		criteria.setCustomerGender("Male");
+		criteria.setNationName("USA");
+		criteria.setMembershipLevelName("VIP");
+
+		ByteArrayInputStream result = customerService.downloadExcel(criteria);
 
 		assertNotNull(result);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
